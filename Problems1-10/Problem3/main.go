@@ -13,25 +13,21 @@ func main() {
 }
 
 func largestPrimeFactor(num int64) int64 {
-	var primes []int64
 	var largestPrime int64
 
-	for x := int64(2); x <= num; x++ {
-		isPrime := true
-		for _, v := range primes {
-			if x%v == 0 {
-				isPrime = false
+	for x := num; x >= int64(2); x-- {
+		if num % x == 0 {
+			isLargestPrime := true
+			for v := int64(2); v < x; v++ {
+				if x % v == 0 {
+					isLargestPrime = false
+					break
+				}
+			}
+			if isLargestPrime {
+				largestPrime = x
 				break
 			}
-		}
-		if isPrime {
-			primes = append(primes, x)
-			if num%x == 0 {
-				largestPrime = x
-			}
-		}
-		if x%int64(100000) == 0 {
-			fmt.Printf("Thru: %v", x)
 		}
 	}
 
